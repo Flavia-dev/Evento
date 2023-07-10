@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,9 +22,22 @@ public class Atividade {
     private String descricao;
     private Double preco;
 
+
     @ManyToOne
-    @JoinColumn(name = "cateoria_id")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+
+    @ManyToMany(mappedBy = "atividades")
+    private Set<Participante> participantes = new HashSet<>();
+
+    @OneToMany(mappedBy = "atividade" )
+    private List<Bloco> blocos = new ArrayList<>();
+
+
+
+
+
 
 
 }
